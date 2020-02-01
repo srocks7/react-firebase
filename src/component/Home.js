@@ -85,8 +85,9 @@ export default class Home extends Component {
                 <div style={{textAlign:'center'}}>
                 <Button onClick={this.signOut} className='btn btn-success'>Signout</Button>
                 </div>
-                
+               
             </div>
+           
         )
     }
 }
