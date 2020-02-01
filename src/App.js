@@ -12,7 +12,7 @@ export default class App extends Component {
     super(props);
     
     this.state={
-     user:{}
+     user:[]
 
     }
   }
@@ -36,6 +36,7 @@ componentDidMount(){
     return (
       <div>
      {this.state.user ? (<Home/>) : (<Login/>)}
+     
     </div>
     )
   }

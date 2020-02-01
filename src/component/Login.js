@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import fire from './Fire'
-
+import SignUp from './Signup'
 export default class Login extends Component {
 
     constructor(props){
         super(props);
         this.login=this.login.bind(this);
         this.handleChange=this.handleChange.bind(this);
-        this.signUp=this.signUp.bind(this);
        
         this.state={
           email:'',
@@ -20,16 +19,10 @@ export default class Login extends Component {
        e.preventDefault();
        fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
        }).catch((error)=>{
-           console.log(error);
+          alert("user not found");
        });
       }
-      signUp(e){
-        e.preventDefault();
-        fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
-        .catch((error)=>{
-            console.log(error);
-        });
-       }
+    
       handleChange(e){
           this.setState({[e.target.name] : e.target.value} );
 
@@ -37,8 +30,13 @@ export default class Login extends Component {
 
     render() {
         return (
+          <div>
+        <div className='left-alignment'>
+          <div className="login-alignment">
+          <h5 style={{ position:'relative',right:'300px' ,color:"rgb(237,244,197)",fontFamily:'Arial',fontWeight:'bold'}}>FIREBASE LOGIN</h5>
             <div className="Border">
             <div className='form'>
+            
               <Form>
                 <FormGroup>
                   <Label className="font-weight-bold">Email</Label>
@@ -49,13 +47,21 @@ export default class Login extends Component {
                   <Input value={this.state.password} onChange={this.handleChange} type='password' name='password' placeholder='password'/>
                 </FormGroup>
                 <FormGroup style={{textAlign:'center'}}>
-                  <Button type='submit' onClick={this.login} color="success">Login</Button>
-                  <Button style={{marginLeft:'10px'}} type='submit' onClick={this.signUp} color="primary">signUp</Button>
+                  <Button type='submit' onClick={this.login} color="success">Login</Button>    
                 </FormGroup>
               </Form>
-      
             </div>
           </div>
+          </div>
+          
+          
+          </div>
+         < div >
+            <SignUp/>
+          </div>
+          </div>
+          
+            
         )
     }
 }

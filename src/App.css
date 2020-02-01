@@ -1,18 +1,72 @@
 body{
   margin: 0px;
   padding: 0px;
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(47,47,60,1) 0%, rgba(0,212,255,0.6362920168067228) 100%);
 }
 .Border{
   width: 100%;
   height: 250px;
-  max-width: 300px;
+  border-radius: 9px;
+  max-width: 400px;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid black;
+  position: relative;
+  right: 300px;
+  border: 1px solid beige;
+  background-color: cadetblue;
 }
 .form{
   margin: 10px;
 }
 Label{
   opacity: 0.7 ;
+  color: rgb(235, 235, 235);
+  font-weight: bold; 
+  background-color: linear-gradient(90deg, rgba(235,170,86,0.4990371148459384) 100%, rgba(173,119,119,0) 100%, rgba(23,191,210,0) 100%);
+}
+.left-alignment{
+  
+}
+.login-alignment{
+  position: relative;
+  text-align: center;
+  
+}
+.right-alignment{
+  position: relative;
+ background-color: cadetblue;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid beige;
+  border-radius: 9px;
+  padding: 9px;
+  margin-left: auto;
+  margin-right: auto;
+  left: 250px;
+  bottom: 254px;
+}
+.signup-alignment{
+  position: relative;
+  text-align: center;
+}
+.profile-alignment{
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+  
+  margin-top: 10px;
+}
+.profile-border{
+  border: 1px solid beige;
+  border-radius: 6px;
+  height: 400px;
+}
+.profile-data{
+  position: relative;
+  margin: 30px;
+  margin-top: 50px;
+  font-size: 20px;
+  color: beige;
 }

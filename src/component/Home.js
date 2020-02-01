@@ -1,56 +1,91 @@
 import React, { Component } from 'react'
-
-import fire from './Fire'
-import { Button, Input } from 'reactstrap'
 import firebase  from 'firebase';
-
+import fire from './Fire'
+import { Button } from 'reactstrap';
 export default class Home extends Component {
     constructor(props){
         super(props);
-        this.logout=this.logout.bind(this);
-        this.setvalue=this.setvalue.bind(this);
-        this.handleChange=this.handleChange.bind(this);
-    
+        this.signOut=this.signOut.bind(this)
+        // this.getvalue=this.getvalue.bind(this)
         this.state={
-            value:''
+                value:'',
+                image:'',
+                url:''
         }
-        
-       
-        
-      }
-      logout(){
+    }
+    signOut(){
         fire.auth().signOut();
-      }
-      
-    
-    setvalue(){
-        var fire=firebase.database().ref();
-        fire.set ({
-            players:{
-               john:
-                {
-                    number: 1,
-                    age:30
-                },
-               Amanda: {
-                    number: 2,
-                    age: 20
-                 }
-            }
-           
-         });
     }
-    handleChange(e){
-        this.setState({value: e.target.value});
 
+    // getvalue(){
+    //     fire=firebase.database().ref().child('information');
+    //     fire.on("value",snap =>{
+    //         fire.innerText = JSON.stringify(snap.val(), null, 7)
+    //     })
+    // }
+    componentWillMount(){
+      var  fire=firebase.database().ref().child('information/-LzsrVEppgUhXd8EXBFP');
+        fire.on('value', snap =>{
+            this.setState({
+                value : snap.val()
+            })
+        })
     }
+    componentDidMount(){
+        const ref = firebase.storage().ref("image/userpic.png");
+        ref.getDownloadURL()
+        .then(url => this.setState({url}))
+        .catch(e=>{console.log(e);})
+    }
+    
+   
+
     render() {
         return (
-            <div style={{textAlign:'center',width:'100%',maxWidth:'330px'}}>
-                <h1>you are home</h1>
-                <Button onClick={this.logout} className="btn btn-success">Logout</Button>
-                <Input type='text' value={this.state.value} onChange={this.handleChange} placeholder='age...'/>
-                <Button onClick={this.setvalue} className="btn btn-success">setage</Button>
+            
+            <div className='profile-alignment'>
+                <h1 style={{color:"white",textAlign:'center'}}>PROFILE</h1>
+                <div className='profile-border'>
+                <div className="profile-data">
+               
+                <table>
+                    <tr >
+                    <td className="pb-5" style={{position:'relative',left:'125px'}}><img src={this.state.url || "https://via.placeholder.com/100x100"} alt="2323" height="100"   width="100" roundedCircle /></td>
+                    </tr>
+                    
+                    <tr>
+                        <td className="pl-3 mt-3">Email:</td>
+                        <td className="pl-3 mt-3">{this.state.value.email}</td>
+                        
+                    </tr>
+                    <tr>
+                    <td className="pl-3 mt-3">Address:</td>
+                        <td className="pl-3 mt-3">{this.state.value.address}</td>
+                    </tr>
+                    <tr>
+                    <td className="pl-3 mt-3">City:</td>
+                        <td className="pl-3 mt-3">{this.state.value.city}</td>
+                    </tr>
+                    <tr>
+                    <td className="pl-3 mt-3">State:</td>
+                        <td className="pl-3 mt-3">{this.state.value.state}</td>
+                    </tr>
+                <tr>
+                <td className="pl-3 mt-3">Zip:</td>
+                        <td className="pl-3 mt-3">{this.state.value.zip}</td>
+                </tr>
+                
+                </table>
+                
+                
+                 
+                </div>
+               
+                </div>
+                <div style={{textAlign:'center'}}>
+                <Button onClick={this.signOut} className='btn btn-success'>Signout</Button>
+                </div>
+                
             </div>
         )
     }
